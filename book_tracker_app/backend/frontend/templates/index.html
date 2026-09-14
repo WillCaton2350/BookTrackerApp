@@ -45,8 +45,8 @@
 						<div class="inner">
 							<header>
 								<h1>A spot for the bookish mind. Where Literature is kept. <br />
-								Comics, novels, graphic novels, educational material and more.</h1>
-								<i><p>"We can't force the world to be what it should be. It has to happen naturally. Not through acts of terror, but by example. That's what heroes do." <br> - <b>Kevin Grevioux</b></p></i>
+								Comics, novels, graphic novels, Manga, educational material and more.</h1>
+								<i><p>"Focus blurs... Focus blinds. You must take in all of a thing by seeing the totality of it, not by focusing on minutiae. This is as important for a ruler as it is for a painter." <br> - <b>Christopher Ruocchio</b></p></i>
 							</header>
 							<div class="favs">
 										<h3><i>Personal Favorites: </i></h3>
@@ -54,10 +54,10 @@
 							<section class="tiles">
 								<article class="style1">
 									<span class="image">
-										<img src="static/images/absolutebatman_issue1.jpg" alt="" />
+										<img src="static/images/absolute_batman_vol_1.jpg" alt="" />
 									</span>
 									<a href="/">
-										<h2>Absolute Batman</h2>
+										<h2>Absolute Batman Vol. 1</h2>
 										<div class="content">
 											<p>Written by Scott Snyder, this new take on Batman from his origins to the relationships with his friends from crime alley.</p>
 										</div>
@@ -212,7 +212,7 @@
 											<img src="{{ image.image }}" alt="Book {{ image.id }}" style="width: 100%; height: 500px;" />
 										</span>
 										<a href="#">
-											<h2>{{ image.title }}</h2>
+											<h2>{{ image.title }}</h2> <!--title, id, and descriptoin all come from the data models-->
 											<div class="content">
 												<p>{{ image.description }}</p>
 											</div>
@@ -227,17 +227,6 @@
 										.page-arrow.disabled { color: #ccc; cursor: not-allowed; }
 										.page-info { display: inline-block; margin: 0 20px; font-size: 18px; }
 									</style>
-									{% if page_obj.has_previous %}
-										<a href="?page={{ page_obj.previous_page_number }}" class="page-arrow">&larr;</a>
-									{% else %}
-										<span class="page-arrow disabled">&larr;</span>
-									{% endif %}
-									<span class="page-info">Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</span>
-									{% if page_obj.has_next %}
-										<a href="?page={{ page_obj.next_page_number }}" class="page-arrow">&rarr;</a>
-									{% else %}
-										<span class="page-arrow disabled">&rarr;</span>
-									{% endif %}
 								</div>
 							</div>
 						</div>

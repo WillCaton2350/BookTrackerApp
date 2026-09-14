@@ -32,7 +32,7 @@ MIDDLEWARE = [
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
-    'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    # clickjacking middleware removed so X-Frame-Options can be controlled via setting
 ]
 
 ROOT_URLCONF = 'backend.urls'
@@ -105,3 +105,6 @@ STATIC_URL = 'static/'
 STATIC_ROOT = os.path.join(BASE_DIR,'static')
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'uploads')
+
+# Security settings
+X_FRAME_OPTIONS = 'SAMEORIGIN'

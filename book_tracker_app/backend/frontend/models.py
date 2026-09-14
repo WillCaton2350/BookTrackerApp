@@ -1,4 +1,5 @@
 from django.db import models
+import os
 
 class book_model(models.Model):
     book_title = models.CharField(max_length=255)
@@ -12,7 +13,6 @@ class book_model(models.Model):
     def __str__(self):
         return self.book_title + ' ' + self.book_author
 
-
 class review_model(models.Model):
     book_review_title = models.CharField(max_length=255)
     book_review_author = models.CharField(max_length=255)
@@ -23,4 +23,3 @@ class review_model(models.Model):
 
     def __str__(self):
         return f"{self.book_review_title} | {self.book_review_author} | [{self.review_rate}/5]"
-        

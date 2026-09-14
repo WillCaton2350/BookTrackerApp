@@ -16,96 +16,89 @@ then pass said variable/object to the serializer and return the serialized data 
 '''
 
 class index:
+    @staticmethod
+    def resolve_file_path(uploaded_file):
+        if not uploaded_file:
+            return None
+
+        file_path = uploaded_file.path
+
+        if not os.path.exists(file_path) and 'uploads/uploads/' in file_path:
+            file_path = file_path.replace('uploads/uploads/', 'uploads/')
+
+        return file_path
+
     def home_page(request):
-        # Create 7 pages of book placeholders with unique content
         books_data = [
             {'image': 'static/images/image1.jpg', 'title': 'Empire of Silence', 'description': 'Christopher Ruocchio'},
-            {'image': 'static/images/image2.jpg', 'title': 'Howling Dark', 'description': 'Christopher Ruocchio'},
-            {'image': 'static/images/image3.jpg', 'title': 'Demon in White', 'description': 'Christopher Ruocchio'},
-            {'image': 'static/images/image4.jpg', 'title': 'Kingdoms of Death', 'description': 'Christopher Ruocchio'},
-            {'image': 'static/images/image5.jpg', 'title': 'Ashes of Man', 'description': 'Christopher Ruocchio'},
-            {'image': 'static/images/image6.jpg', 'title': 'Disquiet Gods', 'description': 'Christopher Ruocchio'},
-            {'image': 'static/images/image7.jpg', 'title': 'Shadows Upon Time', 'description': 'Christopher Ruocchio'},
             {'image': 'static/images/image8.jpg', 'title': 'Dune', 'description': 'Frank Herbert'},
-            {'image': 'static/images/image9.jpg', 'title': 'Dune Messiah', 'description': 'Frank Herbert'},
-            {'image': 'static/images/image10.jpg', 'title': 'Children of Dune', 'description': 'Frank Herbert'},
-            {'image': 'static/images/image11.jpg', 'title': 'God Emperor Dune', 'description': 'Frank Herbert'},
-            {'image': 'static/images/image12.jpg', 'title': 'Heretics of Dune', 'description': 'Frank Herbert'},
-            {'image': 'static/images/image13.jpg', 'title': 'Chapterhouse Dune', 'description': 'Frank Herbert'},
-            {'image': 'static/images/image14.jpg', 'title': 'Black Cake', 'description': 'Charmaine Wilkerson'},
-            {'image': 'static/images/image15.jpg', 'title': 'Good Dirt', 'description': 'Charmaine Wilkerson'},
-            {'image': 'static/images/image16.jpg', 'title': 'Blown to Hell', 'description': 'Walter Pinicus'},
-            {'image': 'static/images/image17.jpg', 'title': 'Bombs over Bikini', 'description': 'Connie Goldsmith'},
-            {'image': 'static/images/image18.jpg', 'title': 'Codependent No More', 'description': 'Melody Beattie'},
-            {'image': 'static/images/image19.jpg', 'title': 'Crude Capitalisim', 'description': 'Adam Hanieh'},
-            {'image': 'static/images/image20.jpg', 'title': 'Darkwater', 'description': 'W. E. B. Du Bois'},
-            {'image': 'static/images/image21.jpg', 'title': 'False War', 'description': 'Carlos Manuel Álvarez'},
-            {'image': 'static/images/image22.jpg', 'title': 'Free the Land', 'description': 'Edward Onaci'},
-            {'image': 'static/images/image23.jpg', 'title': 'Gaza', 'description': 'Norman Finkelstien'},
-            {'image': 'static/images/image24.jpg', 'title': 'Crusade for Justice', 'description': 'Alfreda Duster'},
-            {'image': 'static/images/image25.jpg', 'title': 'DSA in Python', 'description': 'Michael Goodrich'},
-            {'image': 'static/images/image26.jpg', 'title': 'Palestine', 'description': 'Sumaya Awad'},
-            {'image': 'static/images/image27.jpg', 'title': 'Think Again', 'description': 'Adam Grant'},
             {'image': 'static/images/image28.jpg', 'title': 'Jade City', 'description': 'Fonda Lee'},
-            {'image': 'static/images/image29.jpg', 'title': 'Jade War', 'description': 'Fonda Lee'},
-            {'image': 'static/images/image30.jpg', 'title': 'Jade Legacy', 'description': 'Fonda Lee'},
-            {'image': 'static/images/image31.jpg', 'title': 'Binti', 'description': 'Nnedi Okorafor'},
-            {'image': 'static/images/image32.jpg', 'title': 'Binti: Home', 'description': 'Nnedi Okorafor'},
-            {'image': 'static/images/image33.jpg', 'title': 'Binti: The Night Masquerade', 'description': 'Nnedi Okorafor'},
-            {'image': 'static/images/image34.jpg', 'title': 'Project Hailmary', 'description': 'Andy Weir'},
-            {'image': 'static/images/image35.jpg', 'title': 'Sword of Kaigen', 'description': 'M.L. Wang'},
-            {'image': 'static/images/image36.jpg', 'title': 'Last Contract of Isako', 'description': 'Fonda Lee'},
             {'image': 'static/images/image37.jpg', 'title': 'Red Rising', 'description': 'Pierce Brown'},
-            {'image': 'static/images/image38.jpg', 'title': 'Golden Son', 'description': 'Pierce Brown'},
-            {'image': 'static/images/image39.jpg', 'title': 'Morning Star', 'description': 'Pierce Brown'},
-            {'image': 'static/images/image40.jpg', 'title': 'Iron Gold', 'description': 'Pierce Brown'},
-            {'image': 'static/images/image41.jpg', 'title': 'Dark Age', 'description': 'Pierce Brown'},
-            {'image': 'static/images/image42.jpg', 'title': 'Lightbringer', 'description': 'Pierce Brown'},
+            {'image': 'static/images/image31.jpg', 'title': 'Binti', 'description': 'Nnedi Okorafor'},
+            {'image': 'static/images/image14.jpg', 'title': 'Black Cake', 'description': 'Charmaine Wilkerson'},
         ]
         paginator = Paginator(books_data, 6)
         page_number = request.GET.get('page', 1)
         page_obj = paginator.get_page(page_number)
         return render(request, 'index.html', {'page_obj': page_obj})
-    
+
+
     def library(request):
-        # Prefer Book objects if any exist; otherwise use placeholder data
-        model_entries = book_model.objects.all()
-        if model_entries.exists():
-            books_data = []
-            for b in model_entries:
-                img = None
-                try:
-                    img = b.book_image.url
-                except Exception:
-                    img = '/static/images/image1.jpg'
-                books_data.append({'id': b.id, 'image': img, 'title': b.book_title, 'description': b.book_author})
-    
-        paginator = Paginator(books_data, 6)
+        books = book_model.objects.all().order_by('id')
+
+        paginator = Paginator(books, 6)
+
         page_number = request.GET.get('page', 1)
         page_obj = paginator.get_page(page_number)
-        return render(request, 'library.html', {'page_obj': page_obj})
 
-    def book_download(request, id):
+        context = {
+            'page_obj': page_obj,
+        }
+
+        is_ajax = request.headers.get('X-Requested-With') == 'XMLHttpRequest'
+        is_htmx = request.META.get('HTTP_HX_REQUEST') == 'true'
+
+        if is_ajax or is_htmx:
+            return render(
+                request,
+                'partials/library_page.html',
+                context
+            )
+
+        return render(
+            request,
+            'library.html',
+            context
+        )
+    
+    def book_view(request, id):
         try:
             book = book_model.objects.get(pk=id)
         except book_model.DoesNotExist:
-            raise Http404("Book not found")
+            raise Http404("Book Data Model not found")
 
         if not book.book_file:
             raise Http404("File not found for this book")
 
-        file_path = book.book_file.path
-        
-        # Handle old uploads (stored as "uploads/filename.epub")
-        # which creates double "uploads/uploads/" when MEDIA_ROOT is "uploads/"
-        if not os.path.exists(file_path) and 'uploads/uploads/' in file_path:
-            file_path = file_path.replace('uploads/uploads/', 'uploads/')
-        
+        file_path = index.resolve_file_path(book.book_file)
         if not os.path.exists(file_path):
             raise Http404("File missing on disk")
 
         filename = os.path.basename(book.book_file.name)
-        return FileResponse(open(file_path, 'rb'), as_attachment=True, filename=filename)
+        extension = os.path.splitext(filename)[1].lower()
+        content_types = {
+            '.pdf': 'application/pdf',
+            '.epub': 'application/epub+zip',
+            '.txt': 'text/plain',
+            '.html': 'text/html',
+            '.htm': 'text/html',
+        }
+
+        response = FileResponse(open(file_path, 'rb'), as_attachment=False, filename=filename)
+        response["Content-Type"] = content_types.get(extension, 'application/octet-stream')
+        response["Content-Disposition"] = f'inline; filename="{filename}"'
+        return response
+    
         
     def Reviews(request):
         reviews = review_model.objects.order_by('-review_timestamp')
@@ -200,8 +193,60 @@ class REVIEW_VALUES:
         elif request.method == 'DELETE':
             model.delete()
             return Response(status=status.HTTP_204_NO_CONTENT)
-        
-    
 
 
-        
+class PDF_Documents:
+    # Both the logic for the search feature and the library book to ereader mappings are contained in this 1:many in_apps_docs() function. (Both use the book_models data models)
+    def ereader(request, book_id=None):
+        selected_id = book_id if book_id is not None else request.GET.get('book_id') or request.GET.get('doc_id')
+        # SEARCH BAR 
+        if request.method == 'POST':
+            searchbar = request.POST.get('searchbar','').strip()
+            # this takes the data entered in to the search bar which is handled by the empty string, targets the searchbar name in the html gets the text from the empty string and posts it to the url as a request? All of this is saved to a searchbar variable.
+            if searchbar:
+                book = book_model.objects.filter(book_title__icontains=searchbar).first()
+                # user defined variable = book_title__iexact ensures that the text data sent through the form is spelled correctly. (exact)
+                if book:
+                    # if the book variable that holds the text data that is mapped to the book model is true, then store its id in the selected_id variable.
+                    selected_id = book.id
+                else:
+                    book = None
+                    # Handles / closes the base case for each if statement
+            else:
+                book = None
+                # ^
+        else:
+            book = None
+            # ^
+
+
+
+
+        # BOOK SELECTION
+        documents = list(book_model.objects.all().order_by('id')) 
+        # when the 'book_id' on the library.html page is triggered which is mapped to the ereader.html page, view the pdf file inside of the viewer.
+        if selected_id: # The HTML and the Admin Panel are linked through the data models (think of it as the way we connected the data models to the admin.py file)
+            selected_book = book_model.objects.filter(id=selected_id).first() # This gets the specified book that is mapped from the text data to the id of the book object
+        elif documents:
+            selected_book = documents[0]  # this line of code is if no specific book is selected, then use the first book as default, aka the object at the 0 index
+
+
+        pdf_url = None
+        if selected_book and selected_book.book_file:
+            pdf_url = selected_book.book_file.url
+
+        context = {
+            'documents': documents,
+            'active': selected_book,
+            'selected_id': str(selected_id) if selected_id is not None else None,
+            # If the user defined variable selected_id exists then the value in the key value pair that is the selected_id gets type casted to a string. If no value exists then the value is None, not empty.
+            'pdf_url': pdf_url,
+            'active_pdf_url': pdf_url,
+        }
+
+        return render(request, 'ereader.html', context)
+
+
+ 
+
+
