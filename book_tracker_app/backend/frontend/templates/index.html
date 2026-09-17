@@ -1,5 +1,6 @@
 <!DOCTYPE HTML>
 <html>
+	{% load static %}
 	<head>
 		<title>Book Reader App</title>
 		<meta charset="utf-8" />
@@ -45,8 +46,8 @@
 						<div class="inner">
 							<header>
 								<h1>A spot for the bookish mind. Where Literature is kept. <br />
-								Comics, novels, graphic novels, educational material and more.</h1>
-								<i><p>"We can't force the world to be what it should be. It has to happen naturally. Not through acts of terror, but by example. That's what heroes do." <br> - <b>Kevin Grevioux</b></p></i>
+								Comics, novels, graphic novels, Manga, educational material and more.</h1>
+								<i><p>"Focus blurs... Focus blinds. You must take in all of a thing by seeing the totality of it, not by focusing on minutiae. This is as important for a ruler as it is for a painter." <br> - <b>Christopher Ruocchio</b></p></i>
 							</header>
 							<div class="favs">
 										<h3><i>Personal Favorites: </i></h3>
@@ -54,10 +55,12 @@
 							<section class="tiles">
 								<article class="style1">
 									<span class="image">
-										<img src="static/images/absolutebatman_issue1.jpg" alt="" />
+										<img src="static/images/absolute_batman_vol_1.jpg" alt="" />
 									</span>
-									<a href="/">
-										<h2>Absolute Batman</h2>
+									<a href="{% url 'docs' %}?book_id=93">
+										<!--We no longer use system or in codebase paths to the pdf file but use the Django url configuration attached to the frontend/urls.py file. 
+										This is called Django URL Reversing-->
+										<h2>Absolute Batman Vol. 1</h2>
 										<div class="content">
 											<p>Written by Scott Snyder, this new take on Batman from his origins to the relationships with his friends from crime alley.</p>
 										</div>
@@ -67,7 +70,7 @@
 									<span class="image">
 										<img src="static/images/absolutebatmanvolume2.jpg" alt="" />
 									</span>
-									<a href="/">
+									<a href="{% url 'docs' %}?book_id=94">
 										<h2>Absolute Batman - Vol.2</h2>
 										<div class="content">
 											<p>Written by Scott Snyder, with the introduction of Bane and Killer Croc, this story perfectly expands the new world of Gotham city and the vision of artist Nick Dragotta.</p>
@@ -78,7 +81,7 @@
 									<span class="image">
 										<img src="static/images/bardabook.jpg" alt="" />
 									</span>
-									<a href="/">
+									<a href="{% url 'docs' %}?book_id=50">
 										<h2>Barda</h2>
 										<div class="content">
 											<p>Written by Ngozi Ukazu, this story reveals a softer side of Barda where she meets Scott Free. We get an insight into her origins, life on Apokolips and her relationship with the furies.</p>
@@ -89,7 +92,7 @@
 									<span class="image">
 										<img src="static/images/thenewgodsvol1_Ram_V.jpg" alt="" />
 									</span>
-									<a href="/">
+									<a href="{% url 'docs' %}?book_id=110">
 										<h2>The New Gods - Vol.1</h2>
 										<div class="content">
 											<p>Written by Ram V with artwork by Evan Cagle, we get into the relationship of Barda and Scott Free caring for their daughter as Orion asks Scott to help him defy the wishes of Highfather and save a new God born in India.</p>
@@ -100,7 +103,7 @@
 									<span class="image">
 										<img src="static/images/the_new_gods_vol_2.jpg" alt="" />
 									</span>
-									<a href="/">
+									<a href="{% url 'docs' %}?book_id=111">
 										<h2>The New Gods - Vol.2</h2>
 										<div class="content">
 											<p>Written by Ram V with artwork by Evan Cagle, this take on the New Gods connects to the Absolute Universe and the death of Darkseid in an epic journey through the fourth world to protect Kamaal. The newest addition. A New God.</p>
@@ -111,7 +114,7 @@
 									<span class="image">
 										<img src="static/images/mattfractionbatman.jpg" alt="" />
 									</span>
-									<a href="/">
+									<a href="{% url 'docs' %}?book_id=106">
 										<h2>Batman 2025</h2>
 										<div class="content">
 											<p>Written By Matt Fraction, we explore Gotham City with new villains like the Ojo and the Minotaur. We are introduced to new and old characters like Anika Zeller, Hugo Strange the Penguin and more.</p>
@@ -122,7 +125,7 @@
 									<span class="image">
 										<img src="static/images/thebluemarvel.jpg" alt="" />
 									</span>
-									<a href="/">
+									<a href="{% url 'docs' %}?book_id=109">
 										<h2>Adam: Legend of the Blue Marvel</h2>
 										<div class="content">
 											<p>Written by Kevin Grevioux, This story takes us through the Jim Crow era the many problems america would have with a black superhero. He must team up with the Avengers to defeat Anti-Man. </p>
@@ -131,9 +134,9 @@
 								</article>
 								<article class="style3">
 									<span class="image">
-										<img src="static/images/rookexodus.jpg" alt="" />
+										<img src="static/images/rook_vol_one.png" alt="" />
 									</span>
-									<a href="/">
+									<a href="{% url 'docs' %}?book_id=155">
 										<h2>Rook: Exodus</h2>
 										<div class="content">
 											<p>Written by Geoff Johns and Jason Fabok, we are introduced to a dying planet that is surviving on a world engine. All of the animals are electronic and are used in a civil war between our main characters.</p>
@@ -144,7 +147,7 @@
 									<span class="image">
 										<img src="static/images/batwingvol1.png" alt="" />
 									</span>
-									<a href="/">
+									<a href="{% url 'docs' %}?book_id=154">
 										<h2>Batwing</h2>
 										<div class="content">
 											<p>Written by Judd Winnick, an African based superhero named David Zavimbe is scouted by Bruce Wayne and arms him with the ability to protect the people and intrest of Africa.</p>
@@ -155,7 +158,7 @@
 									<span class="image">
 										<img src="static/images/Kinginblack.jpg" alt="" />
 									</span>
-									<a href="/">
+									<a href="{% url 'docs' %}?book_id=153">
 										<h2>King In Black</h2>
 										<div class="content">
 											<p>Written by Donny Cates with artwork by Stegman, this is the conclusion of the Venom series where Eddie Brock with help from the Avengers defeat Knull in a battle to protect the Earth.</p>
@@ -166,8 +169,8 @@
 									<span class="image">
 										<img src="static/images/the_ultimates_vol_1.jpg" alt="" />
 									</span>
-									<a href="/">
-										<h2>The Ultimates</h2>
+									<a href="{% url 'docs' %}?book_id=156">
+										<h2>The Ultimates Vol. 1</h2>
 										<div class="content">
 											<p>Written by Deniz Camp, this is a new take on the villains from the marvel universe stemming from the King in Black run where The Maker, an evil Reed Richards from another dimension reigns supreme.</p>
 										</div>
@@ -175,12 +178,12 @@
 								</article>
 								<article class="style4">
 									<span class="image">
-										<img src="static/images/DAWNRUNNER.jpg" alt="" />
+										<img src="static/images/geigervol1.jpg" alt="" />
 									</span>
 									<a href="/">
-										<h2>Dawn Runner</h2>
+										<h2>Geiger Vol. 1</h2>
 										<div class="content">
-											<p>Written by Ram V with artwork by Evan Cagle, this story is about a cyberpunk themed world where people in massive machines battle for the fate of their world.</p>
+											<p>Written by Geoff Johns with artwork by Gary Frank, this story is about a hero named Tariq Geiger and his two headed companion Barney in a post apocalyptic world.</p>
 										</div>
 									</a>
 								</article>
@@ -205,40 +208,25 @@
 								<div style="text-align: center; margin-bottom: 20px;">
 									<h3><i>Most Popular:</i></h3>
 								</div>
+								<!--Paginator absent arrow UI-->
 								<section class="tiles">
-									{% for image in page_obj %}
+									{% for book in page_obj %}
 									<article class="{% cycle 'style1' 'style2' 'style3' 'style4' 'style5' 'style6' %}">
 										<span class="image">
-											<img src="{{ image.image }}" alt="Book {{ image.id }}" style="width: 100%; height: 500px;" />
+											{% if book.book_image %}
+											<img src="{{ book.book_image.url }}" alt="Book {{ book.book_title }}" style="width: 100%; height: 500px;" />
+											{% endif %}
 										</span>
-										<a href="#">
-											<h2>{{ image.title }}</h2>
+										<a href="{% url 'docs' %}?book_id={{ book.id }}">
+											<h2>{{ book.book_title }}</h2> <!--title, id, and description all come from the data models-->
 											<div class="content">
-												<p>{{ image.description }}</p>
+												<p>{{ book.book_author }}</p> <!--Auto escaping is a security measure that protext XSS injections about Django's ability to automatically filter the data from the data models, when called via dot notation? {{ Book.Title }} Title coming from the book data model. -->
 											</div>
 										</a>
 									</article>
 									{% endfor %}
+
 								</section>
-								<div style="text-align: center; margin-top: 30px;">
-									<style>
-										.page-arrow { display: inline-block; padding: 10px 20px; margin: 0 20px; font-size: 28px; text-decoration: none; color: #333; cursor: pointer; }
-										.page-arrow:hover { color: #007bff; }
-										.page-arrow.disabled { color: #ccc; cursor: not-allowed; }
-										.page-info { display: inline-block; margin: 0 20px; font-size: 18px; }
-									</style>
-									{% if page_obj.has_previous %}
-										<a href="?page={{ page_obj.previous_page_number }}" class="page-arrow">&larr;</a>
-									{% else %}
-										<span class="page-arrow disabled">&larr;</span>
-									{% endif %}
-									<span class="page-info">Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</span>
-									{% if page_obj.has_next %}
-										<a href="?page={{ page_obj.next_page_number }}" class="page-arrow">&rarr;</a>
-									{% else %}
-										<span class="page-arrow disabled">&rarr;</span>
-									{% endif %}
-								</div>
 							</div>
 						</div>
 					</div>
@@ -269,14 +257,10 @@
 							<section>
 								<h2>Follow</h2>
 								<ul class="icons">
-									<li><a href="#" class="icon brands style2 fa-twitter"><span class="label">Twitter</span></a></li>
-									<li><a href="#" class="icon brands style2 fa-facebook-f"><span class="label">Facebook</span></a></li>
-									<li><a href="#" class="icon brands style2 fa-instagram"><span class="label">Instagram</span></a></li>
-									<li><a href="#" class="icon brands style2 fa-dribbble"><span class="label">Dribbble</span></a></li>
-									<li><a href="#" class="icon brands style2 fa-github"><span class="label">GitHub</span></a></li>
-									<li><a href="#" class="icon brands style2 fa-500px"><span class="label">500px</span></a></li>
-									<li><a href="#" class="icon solid style2 fa-phone"><span class="label">Phone</span></a></li>
-									<li><a href="#" class="icon solid style2 fa-envelope"><span class="label">Email</span></a></li>
+									<li><a href="{{ TWITTER_URL }}" target="_blank" class="icon brands style2 fa-twitter"><span class="label">Twitter</span></a></li>
+									<li><a href="{{ LINKEDIN_URL }}" target="_blank" class="icon brands style2 fa-linkedin"><span class="label">linkedin</span></a></li>
+									<li><a href="{{ INSTAGRAM_URL }}" target="_blank" class="icon brands style2 fa-instagram"><span class="label">Instagram</span></a></li>
+									<li><a href="{{ GITHUB_URL }}" target="_blank" class="icon brands style2 fa-github"><span class="label">GitHub</span></a></li>
 								</ul>
 							</section>
 							<ul class="copyright">
@@ -284,7 +268,6 @@
 							</ul>
 						</div>
 					</footer>
-
 			</div>
 
 		<!-- Scripts -->

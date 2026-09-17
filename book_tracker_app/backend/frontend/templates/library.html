@@ -1,145 +1,291 @@
 <!DOCTYPE HTML>
 {% load static %}
 <html>
-	<head>
-		<title>Book Reader App</title>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<link rel="stylesheet" href="static/assets/css/main.css" />
-		<noscript><link rel="stylesheet" href="static/assets/css/noscript.css" /></noscript>
-	</head>
-	<body class="is-preload">
-		<!-- Wrapper -->
-			<div id="wrapper">
+<head>
+    <title>Book Reader App</title>
+    <meta charset="utf-8" />
+    <meta name="viewport"content="width=device-width, initial-scale=1, user-scalable=no"/>
+    <link rel="stylesheet"href="{% static 'assets/css/main.css' %}"/>
+    <noscript><link rel="stylesheet" href="{% static 'assets/css/noscript.css' %}"/></noscript>
+</head>
+<body class="is-preload">
+    <div id="wrapper">
+        <header id="header">
+            <div class="inner">
+                <a href="{% url 'index' %}" class="logo"> <!--This is called URL reversing. Dynamically generating a URL path based on the given "name" assigned to said path in the frontend/urls.py file (eg. name='docs' or in this case name="index") Rather than hard-coding the External URL string. URL Reversing is used as a secutity measure. (eg. Obfuscating the external url string from the inspect page) -->
+                    <span class="symbol">
+                        <img src="{% static 'images/bookstack.png' %}" alt=""/>
+                    </span>
+                    <span class="title">
+                        Book Reader App
+                    </span>
+                </a>
+                <nav>
+                    <ul>
+                        <li>
+                            <a href="#menu">
+                                Menu
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </header>
+        <nav id="menu">
+            <h2>Menu</h2>
+            <ul>
+                <li><a href="{% url 'index' %}">Home</a></li>
+                <li><a href="{% url 'library' %}">Library</a></li>
+                <li><a href="{% url 'Reviews' %}">Reviews</a></li>
+            </ul>
+        </nav>
+        <!---------->
+        <div id="main">
+            <div class="inner">
+                <h1>
+                    My Library
+                </h1>
+                <form action="{% url 'docs' %}" method="post">
+                    {% csrf_token %}
+                    <!--There can be a button, link, or page path on another site that makes a request to my endpoint to delete, update, create or outright manipulate an object. CSRF protects against this. Not XXS or SQL Injections-->
+                    <input name="searchbar" id="search" style="width: 1800px; color: #fff; font-family: Arial, Helvetica, sans-serif; font: bold; background-color: #181818; border-color: #585858;" ></input>
+                    <div class="search_btn">
+                        <button type="submit">
+                            Search
+                        </button>
+                    </div>
+                </form>
+                <!---------->
+                <div
+                    class="pagination-section"
+                    style="margin-top: 40px;">
+                    <div style="text-align: center; margin-bottom: 20px;">
+                        <h3><i>Available Content:</i></h3>
+                    </div>
+                    <div id="library-results">
+                        {% include 'partials/library_page.html' %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <footer id="footer">
+            <div class="inner">
+                <section>
+                    <h2>
+                        Get in touch
+                    </h2>
+                    <form method="post" action="#">
+                        {% csrf_token %}
+                        <div class="fields">
+                            <div class="field half">
+                                <input type="text"name="name"id="name"placeholder="Name"/>
+                            </div>
+                            <div class="field half">
+                                <input type="email" name="email" id="email" placeholder="Email"/>
+                            </div>
+                            <div class="field">
+                                <textarea name="message" id="message" placeholder="Message"></textarea>
+                            </div>
+                        </div>
+                        <ul class="actions">
+                            <li>
+                                <input type="submit" value="Send" class="primary"/>
+                            </li>
+                        </ul>
+                    </form>
+                </section>
+                <section>
+                    <h2>
+                        Follow
+                    </h2>
+                    <ul class="icons">
+                        <li>
+                            <a href="{{ TWITTER_URL }}" target="_blank"  class="icon brands style2 fa-twitter">
+                                <span class="label">Twitter</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ LINKEDIN_URL }}" target="_blank" class="icon brands style2 fa-linkedin">
+                                <span class="label">linkedin</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ INSTAGRAM_URL }}" target="_blank" class="icon brands style2 fa-instagram">
+                                <span class="label">Instagram</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ GITHUB_URL }}" target="_blank" class="icon brands style2 fa-github">
+                                <span class="label">GitHub</span>
+                            </a>
+                        </li>
+                    </ul>
+                </section>
+                <ul class="copyright">
 
-				<!-- Header -->
-					<header id="header">
-						<div class="inner">
+                    <li>
+                        &copy; Untitled.
+                        All rights reserved
+                    </li>
 
-							<!-- Logo -->
-								<a href="index" class="logo">
-									<span class="symbol"><img src="static/images/bookstack.png" alt="" /></span><span class="title">Book Reader App</span>
-								</a>
+                    <li>
 
-							<!-- Nav -->
-								<nav>
-									<ul>
-										<li><a href="#menu">Menu</a></li>
-									</ul>
-								</nav>
+                        Design:
 
-						</div>
-					</header>
+                        <a href="http://html5up.net">
+                            HTML5 UP
+                        </a>
 
-				<!-- Menu -->
-					<nav id="menu">
-						<h2>Menu</h2>
-						<ul>
-							<li><a href="index">Home</a></li>
-							<li><a href="library">Library</a></li>
-							<li><a href="Reviews">Reviews</a></li>
-						</ul>
-					</nav>
+                    </li>
 
-				<!-- Main -->
-					<div id="main">
-						<div class="inner">
-							<h1>My Library</h1>
-							<div class="pagination-section" style="margin-top: 40px;">
-								<div style="text-align: center; margin-bottom: 20px;">
-									<h3><i>Download Content:</i></h3>
-								</div>
-								<section class="tiles">
-									{% for image in page_obj %}
-									<article class="{% cycle 'style1' 'style2' 'style3' 'style4' 'style5' 'style6' %}">
-										<span class="image">
-											<img src="{{ image.image }}" alt="Book {{ image.id }}" style="width: 100%; height: 500px;" />
-										</span>
-										{% if image.id %}
-										<a href="{% url 'book_download' image.id %}">
-										{% else %}
-										<a href="#">
-										{% endif %}
-											<h2>{{ image.title }}</h2>
-											<div class="content">
-												<p>{{ image.description }}</p>
-											</div>
-										</a>
-									</article>
-									{% endfor %}
-								</section>
-								<div style="text-align: center; margin-top: 30px;">
-									<style>
-										.page-arrow { display: inline-block; padding: 10px 20px; margin: 0 20px; font-size: 28px; text-decoration: none; color: #333; cursor: pointer; }
-										.page-arrow:hover { color: #007bff; }
-										.page-arrow.disabled { color: #ccc; cursor: not-allowed; }
-										.page-info { display: inline-block; margin: 0 20px; font-size: 18px; }
-									</style>
-									{% if page_obj.has_previous %}
-										<a href="?page={{ page_obj.previous_page_number }}" class="page-arrow">&larr;</a>
-									{% else %}
-										<span class="page-arrow disabled">&larr;</span>
-									{% endif %}
-									<span class="page-info">Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</span>
-									{% if page_obj.has_next %}
-										<a href="?page={{ page_obj.next_page_number }}" class="page-arrow">&rarr;</a>
-									{% else %}
-										<span class="page-arrow disabled">&rarr;</span>
-									{% endif %}
-								</div>
-							</div>
-						</div>
-					</div>
+                </ul>
 
-				<!-- Footer -->
-					<footer id="footer">
-						<div class="inner">
-							<section>
-								<h2>Get in touch</h2>
-								<form method="post" action="#">
-									<div class="fields">
-										<div class="field half">
-											<input type="text" name="name" id="name" placeholder="Name" />
-										</div>
-										<div class="field half">
-											<input type="email" name="email" id="email" placeholder="Email" />
-										</div>
-										<div class="field">
-											<textarea name="message" id="message" placeholder="Message"></textarea>
-										</div>
-									</div>
-									<ul class="actions">
-										<li><input type="submit" value="Send" class="primary" /></li>
-									</ul>
-								</form>
-							</section>
-							<section>
-								<h2>Follow</h2>
-								<ul class="icons">
-									<li><a href="#" class="icon brands style2 fa-twitter"><span class="label">Twitter</span></a></li>
-									<li><a href="#" class="icon brands style2 fa-facebook-f"><span class="label">Facebook</span></a></li>
-									<li><a href="#" class="icon brands style2 fa-instagram"><span class="label">Instagram</span></a></li>
-									<li><a href="#" class="icon brands style2 fa-dribbble"><span class="label">Dribbble</span></a></li>
-									<li><a href="#" class="icon brands style2 fa-github"><span class="label">GitHub</span></a></li>
-									<li><a href="#" class="icon brands style2 fa-500px"><span class="label">500px</span></a></li>
-									<li><a href="#" class="icon solid style2 fa-phone"><span class="label">Phone</span></a></li>
-									<li><a href="#" class="icon solid style2 fa-envelope"><span class="label">Email</span></a></li>
-								</ul>
-							</section>
-							<ul class="copyright">
-								<li>&copy; Untitled. All rights reserved</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
-							</ul>
-						</div>
-					</footer>
+            </div>
 
-			</div>
+        </footer>
 
-		<!-- Scripts -->
-			<script src="static/assets/js/jquery.min.js"></script>
-			<script src="static/assets/js/browser.min.js"></script>
-			<script src="static/assets/js/breakpoints.min.js"></script>
-			<script src="static/assets/js/util.js"></script>
-			<script src="static/assets/js/main.js"></script>
 
-	</body>
+    </div>
+
+
+
+    <!-- Scripts -->
+
+    <script
+        src="{% static 'assets/js/jquery.min.js' %}"
+    ></script>
+
+    <script
+        src="{% static 'assets/js/browser.min.js' %}"
+    ></script>
+
+    <script
+        src="{% static 'assets/js/breakpoints.min.js' %}"
+    ></script>
+
+    <script
+        src="{% static 'assets/js/util.js' %}"
+    ></script>
+
+    <script
+        src="{% static 'assets/js/main.js' %}"
+    ></script>
+
+
+
+    <!-- AJAX PAGINATION -->
+
+    <script>
+
+        async function loadLibraryPage(pageNumber) {
+
+            try {
+
+                const response = await fetch(
+                    `{% url 'library' %}?page=${pageNumber}`,
+                    {
+                        headers: {
+                            'X-Requested-With': 'XMLHttpRequest'
+                        }
+                    }
+                );
+
+
+                if (!response.ok) {
+
+                    throw new Error(
+                        `HTTP error: ${response.status}`
+                    );
+
+                }
+
+
+                const html = await response.text();
+
+
+                /*
+                    Replace ONLY the contents of
+                    #library-results.
+
+                    The rest of the page remains untouched.
+                */
+
+                document.getElementById(
+                    'library-results'
+                ).innerHTML = html;
+
+
+            } catch (error) {
+
+                console.error(
+                    'Error loading library page:',
+                    error
+                );
+
+            }
+
+        }
+
+
+
+        /*
+            Load page 1 when library.html first opens.
+        */
+
+        document.addEventListener(
+            'DOMContentLoaded',
+            function () {
+
+                /*
+                    We don't need to fetch page 1 because
+                    Django already rendered it.
+
+                    Therefore this stays empty.
+                */
+
+            }
+        );
+
+
+
+        /*
+            Handle pagination arrows.
+
+            This uses event delegation so that the newly
+            inserted arrows continue working after AJAX.
+        */
+
+        document.addEventListener(
+            'click',
+            function (event) {
+
+
+                const link =
+                    event.target.closest(
+                        '.page-arrow[data-page]'
+                    );
+
+
+                if (!link) {
+                    return;
+                }
+
+
+                event.preventDefault();
+
+
+                const pageNumber =
+                    link.dataset.page;
+
+
+                loadLibraryPage(pageNumber);
+
+            }
+        );
+
+    </script>
+
+
+</body>
+
 </html>

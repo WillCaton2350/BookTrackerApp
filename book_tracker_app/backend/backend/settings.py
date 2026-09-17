@@ -32,7 +32,7 @@ MIDDLEWARE = [
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
-    'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    # clickjacking middleware removed so X-Frame-Options can be controlled via setting
 ]
 
 ROOT_URLCONF = 'backend.urls'
@@ -105,3 +105,14 @@ STATIC_URL = 'static/'
 STATIC_ROOT = os.path.join(BASE_DIR,'static')
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'uploads')
+
+# Links to our Django Context Variables: {{ GITHUB_URL }} etc...
+# This is used to better organize our urls instead of hardcoding them into an a tag. 
+# It is not a security measure, so we will still be able to view the url paths on the inspect page. 
+GITHUB_URL = 'https://github.com/WillCaton2350'
+TWITTER_URL = 'https://x.com/techdev7890'
+INSTAGRAM_URL = 'https://www.instagram.com/techdev_james'
+LINKEDIN_URL = 'https://www.linkedin.com/in/will-caton-jr-511087179/'
+
+# Security settings
+X_FRAME_OPTIONS = 'SAMEORIGIN'

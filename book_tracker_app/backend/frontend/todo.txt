@@ -1,0 +1,18 @@
+The actual library.html page and the partial page library_page.html which uses the ajax request are currently mapped to eachother, I need to rewrite that as one page. 
+
+I didnt need to create a data model for the pdf files for the ereader page, i just needed to map it to the book data models and target them/orderby() id which is also mapped to the html backend 'book_id' and or 'doc_id' (both are thre because of old code and may be redundant)
+ 
+I need to build out all of the CRUD features for the reviews page that uses the API instead of it being --as it is now-- just a post request.
+
+The ereader page is using the book models to list and order the objects from the admin panel, but i need to revisit the UI and its library page mapped trigger. (When the book object is triggered the mapped ereader UI is also) (Like the Library_page.html and Libray.html pages need to be one html page not two)
+
+
+
+
+I need to build out the search feature and the accompanying auto complete feature and map it to the admin panel and ensure that it is still mapped to the ereader page similar to the library page.
+Can I use the Django Paginator select a specific page instead of cycling through all --as of right now-- 20 pages to find the desired book. 
+
+
+
+Add/Import Mozillas PDF.JS to use the native pdf viewer capabilaties to ensure cross browser functionality.
+Add UUID's instead of sequential book ids

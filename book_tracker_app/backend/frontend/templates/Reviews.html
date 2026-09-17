@@ -61,7 +61,7 @@
 								<h3>{{ review.book_review_title }}</h3>
 								<p><strong>Author:</strong> {{ review.book_review_author }}</p>
 								<p><strong>Rating:</strong> {{ review.review_rate }}/5</p>
-								<p>{{ review.review_description }}</p>
+								<p>{{ review.review_description }}</p> <!--THESE ARE THE DATA MODELS ATTACHED TO THE REVIEWS MODEL-->
 								<p><small>{{ review.review_timestamp }}</small></p>
 								{% if review.review_book_image %}
 								<img src="{{ review.review_book_image.url }}" alt="{{ review.book_review_title }}" />
