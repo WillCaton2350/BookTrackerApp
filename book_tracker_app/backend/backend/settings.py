@@ -116,3 +116,5 @@ LINKEDIN_URL = 'https://www.linkedin.com/in/will-caton-jr-511087179/'
 
 # Security settings
 X_FRAME_OPTIONS = 'SAMEORIGIN'
+# This is a security setting that prevents this app/my website from being embedded in an iframe on another site. 
+# If this option wasn't enabled, an attacker could embed my site into an iframe behind a fake (win an ipad!!!) button. This button could perform actions on my actual website, not an instance of it. 
